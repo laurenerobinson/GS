@@ -1,0 +1,170 @@
+GameStart - Setup Guide
+Prerequisites
+Before you begin, ensure you have the following installed:
+
+Visual Studio 2019 or newer
+SQL Server 2019 or newer
+.NET Framework 4.7.2 or newer
+
+Database Setup
+
+Install SQL Server
+
+Download and install SQL Server from Microsoft's official website
+During installation, make note of your server name (default is usually localhost or SQLEXPRESS)
+Enable SQL Server Authentication if you plan to use SQL authentication
+
+
+Create the Database
+sqlCopyCREATE DATABASE GameStartDB;
+GO
+
+USE GameStartDB;
+GO
+
+-- Create SHELF table first (since GAME table references it)
+CREATE TABLE SHELF (
+    Shelf_ID INT PRIMARY KEY,
+    Console VARCHAR(50) NOT NULL
+);
+
+-- Create GAME table
+CREATE TABLE GAME (
+    Game_ID INT PRIMARY KEY,
+    Title VARCHAR(100) NOT NULL,
+    Company VARCHAR(100) NOT NULL,
+    Age_Rating VARCHAR(10),
+    Release_Year INT,
+    ShelfID INT,
+    FOREIGN KEY (ShelfID) REFERENCES SHELF(Shelf_ID)
+);
+
+
+Project Setup
+
+Clone the Repository
+bashCopygit clone [your-repository-url]
+cd GameStart
+
+Open in Visual Studio
+
+Launch Visual Studio
+Go to File > Open > Project/Solution
+Navigate to the cloned repository and open the .sln file
+
+
+Update Database Connection String
+
+Open CRUDForm.cs and GameSearchForm.cs
+Locate the ConnectToDatabase() method in both files
+Update the connection string to match your SQL Server settings:
+
+csharpCopy// Replace LAUS_DELL with your SQL Server name
+DBConnection = new SqlConnection(@"Data Source=YOUR_SERVER_NAME;Initial Catalog=GameStartDB;Integrated Security=True");
+
+Install Required NuGet Packages
+
+Right-click on the solution in Solution Explorer
+Select "Manage NuGet Packages for Solution"
+Install the following packages:
+
+System.Data.SqlClient
+Any other dependencies listed in the project
+
+
+
+
+Update Logo Path
+
+Open LoginForm.cs and GameSearchForm.cs
+Locate the logo loading code
+Either:
+
+Update the path to your own logo:
+
+csharpCopylogoBox.Image = Image.FromFile(@"path_to_your_logo.png");
+
+Or remove the logo loading code if you don't have a logo
+
+
+
+
+
+Running the Application
+
+Build the Solution
+
+Go to Build > Build Solution or press Ctrl + Shift + B
+Fix any build errors if they occur
+
+
+Run the Application
+
+Press F5 or click the "Start" button
+The login form should appear
+
+
+Default Login Credentials
+
+Username: admin
+Password: comeonbaby
+
+
+
+Common Issues and Solutions
+
+Database Connection Error
+
+Verify SQL Server is running
+Check the connection string matches your SQL Server name
+Ensure GameStartDB database exists
+Verify user has appropriate permissions
+
+
+Missing Logo Error
+
+Update the logo file path or
+Comment out the logo loading code
+
+
+Missing Tables Error
+
+Verify all SQL scripts ran successfully
+Check if SHELF and GAME tables exist in GameStartDB
+
+
+
+Customization
+
+Change Theme Colors
+
+Colors are defined using RGB values
+Main theme colors are in the form constructor:
+
+Background: Color.FromArgb(18, 18, 18)
+Accent: Color.FromArgb(150, 0, 0)
+
+
+
+
+Modify Grid Columns
+
+Column customization is in the ColumnAdded event handler
+Adjust column widths and headers as needed
+
+
+
+Support
+For issues or questions:
+
+Check the common issues section above
+Create an issue in the GitHub repository
+[Your preferred contact method]
+
+Contributing
+
+Fork the repository
+Create a feature branch
+Commit your changes
+Push to the branch
+Create a Pull Request
