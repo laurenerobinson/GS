@@ -15,29 +15,7 @@ During installation, make note of your server name (default is usually localhost
 Enable SQL Server Authentication if you plan to use SQL authentication
 
 
-Create the Database
-sqlCopyCREATE DATABASE GameStartDB;
-GO
-
-USE GameStartDB;
-GO
-
--- Create SHELF table first (since GAME table references it)
-CREATE TABLE SHELF (
-    Shelf_ID INT PRIMARY KEY,
-    Console VARCHAR(50) NOT NULL
-);
-
--- Create GAME table
-CREATE TABLE GAME (
-    Game_ID INT PRIMARY KEY,
-    Title VARCHAR(100) NOT NULL,
-    Company VARCHAR(100) NOT NULL,
-    Age_Rating VARCHAR(10),
-    Release_Year INT,
-    ShelfID INT,
-    FOREIGN KEY (ShelfID) REFERENCES SHELF(Shelf_ID)
-);
+Download the Database
 
 
 Project Setup
@@ -59,8 +37,8 @@ Open CRUDForm.cs and GameSearchForm.cs
 Locate the ConnectToDatabase() method in both files
 Update the connection string to match your SQL Server settings:
 
-csharpCopy// Replace LAUS_DELL with your SQL Server name
 DBConnection = new SqlConnection(@"Data Source=YOUR_SERVER_NAME;Initial Catalog=GameStartDB;Integrated Security=True");
+How it's seen in the code " DBConnection = new SqlConnection(@"sqlserver/connection/path"); "
 
 Install Required NuGet Packages
 
@@ -70,7 +48,6 @@ Install the following packages:
 
 System.Data.SqlClient
 Any other dependencies listed in the project
-
 
 
 
@@ -84,8 +61,7 @@ Update the path to your own logo:
 
 csharpCopylogoBox.Image = Image.FromFile(@"path_to_your_logo.png");
 
-Or remove the logo loading code if you don't have a logo
-
+Logo is found in Data/GameStartLogo.png
 
 
 
@@ -100,18 +76,15 @@ Fix any build errors if they occur
 
 Run the Application
 
-Press F5 or click the "Start" button
-The login form should appear
 
 
 Default Login Credentials
 
-Username: admin
-Password: comeonbaby
+Username: AdminUnk
+Password: MIA
 
 
 
-Common Issues and Solutions
 
 Database Connection Error
 
@@ -120,51 +93,3 @@ Check the connection string matches your SQL Server name
 Ensure GameStartDB database exists
 Verify user has appropriate permissions
 
-
-Missing Logo Error
-
-Update the logo file path or
-Comment out the logo loading code
-
-
-Missing Tables Error
-
-Verify all SQL scripts ran successfully
-Check if SHELF and GAME tables exist in GameStartDB
-
-
-
-Customization
-
-Change Theme Colors
-
-Colors are defined using RGB values
-Main theme colors are in the form constructor:
-
-Background: Color.FromArgb(18, 18, 18)
-Accent: Color.FromArgb(150, 0, 0)
-
-
-
-
-Modify Grid Columns
-
-Column customization is in the ColumnAdded event handler
-Adjust column widths and headers as needed
-
-
-
-Support
-For issues or questions:
-
-Check the common issues section above
-Create an issue in the GitHub repository
-[Your preferred contact method]
-
-Contributing
-
-Fork the repository
-Create a feature branch
-Commit your changes
-Push to the branch
-Create a Pull Request
