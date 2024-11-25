@@ -2,7 +2,7 @@ FILES AND DATABASE PROJECT FALL 2024 CS 3320
 
 GameStart Library Management System:
 
-A Windows Forms application built with C# and SQL Server for managing a video game library. This desktop application provides a comprehensive interface for game inventory management.
+A Windows Forms application built with C# and SQL Server for managing a video game library.
 
 Features:
 
