@@ -293,7 +293,7 @@ namespace GstartApp
         {
             try
             {
-                DBConnection = new SqlConnection(@"Data Source=LAUS_DELL;Initial Catalog=GameStartDB;Integrated Security=True");
+                DBConnection = new SqlConnection(@"sqlserver/connection/path");
                 DBConnection.Open();
                 LoadGameData("", "All Categories");
             }
