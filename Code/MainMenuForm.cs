@@ -37,7 +37,7 @@ namespace GstartApp
 
             try
             {
-                logoBox.Image = Image.FromFile(@"C:\Users\robin\Downloads\[removal.ai]_c54a08f5-4839-43a5-aba1-43c768c8d40a-screenshot-2024-11-14-112021.png");
+                logoBox.Image = Image.FromFile(@"logo/image/path.png");
             }
             catch (Exception ex)
             {
